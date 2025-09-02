@@ -1,0 +1,13 @@
+<h2 class="text-white text-4xl  text-center pt-10 pb-1 font-bold hover:text-amber-600">Welcome to Angular</h2>
+<p class="text-white text-center pb-4 ">starting journy in Angular framework </p>
+
+<div class="bg-white p-6 rounded-xl shadow-md pt-10">
+  <h2 class="text-2xl font-bold mb-4 text-blue-600">My Tasks</h2>
+
+  <ul class="space-y-2">
+    <li *ngFor="let task of tasks" 
+        class="p-3 bg-gray-100 rounded-lg hover:bg-gray-200 transition transform hover:scale-103 font-xl">
+      {{ task }}
+    </li>
+  </ul>
+</div>

@@ -1,63 +1,68 @@
-<<<<<<< HEAD
-# AngularApp
+ Angular Practice Repository 🚀
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 20.2.1.
+A practice repository to strengthen my **Angular** skills while building responsive UIs with **Tailwind CSS v4**.  
+This project is focused on learning, experimenting, and applying Angular fundamentals in real-world style components.
 
-## Development server
+---
 
-To start a local development server, run:
+ 🔧 Tech Stack
+- **Framework:** Angular (v17+)
+- **Styling:** Tailwind CSS v4
+- **Language:** TypeScript
+- **Preprocessor:** SCSS
 
+---
+ Getting Started
+
+### Prerequisites
+Make sure you have the following installed:
+- [Node.js](https://nodejs.org/) (v18+ recommended)
+- [Angular CLI](https://angular.dev/tools/cli)  
 ```bash
+npm install -g @angular/cli
+Installation
+Clone the repository:
+
+bash
+Copy code
+git clone https://github.com/Moazali302/Angular-Practice-Repo.git
+cd Angular-Practice-Repo
+Install dependencies:
+
+bash
+Copy code
+npm install
+Start the development server:
+
+bash
+Copy code
 ng serve
-```
+Open your browser:
+ http://localhost:4200/
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
+Learning Objectives
+Deepen understanding of Angular core features:
 
-## Code scaffolding
+Components, Modules & Services
 
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
+Routing & Navigation
 
-```bash
-ng generate component component-name
-```
+Template-driven and Reactive Forms
 
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
+State management basics
 
-```bash
-ng generate --help
-```
+Explore responsive and utility-first design using Tailwind CSS v4
 
-## Building
+Build small, production-like features (e.g., task board, about page)
 
-To build the project run:
-
-```bash
-ng build
-```
-
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
-
-## Running unit tests
-
-To execute unit tests with the [Karma](https://karma-runner.github.io) test runner, use the following command:
-
-```bash
-ng test
-```
-
-## Running end-to-end tests
-
-For end-to-end (e2e) testing, run:
-
-```bash
-ng e2e
-```
-
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
-
-## Additional Resources
-
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
-=======
-# Angular-Practice-Repo
->>>>>>> b0f0479d8df28e63917bd54e119bef95f8de96b7
+📂 Project Structure
+ruby
+Copy code
+src/
+ ┣ app/
+ ┃ ┣ board/        # Task board component
+ ┃ ┣ about/        # About component
+ ┃ ┗ app.module.ts
+ ┣ assets/          # Static assets (images, icons, etc.)
+ ┣ index.html
+ ┗ styles.css      # Global styles with Tailwind integration

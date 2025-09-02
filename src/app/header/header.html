@@ -5,17 +5,14 @@
       <!-- Logo -->
       <div class="flex-shrink-0 text-xl font-bold">
         MyApp
-    </div>
-    
-       <img [src]="imgUrl" alt="logo" class="size-17 bg-transparent rounded-full">
+      </div>
+
+      <img [src]="imgUrl" alt="logo" class="size-17 bg-transparent rounded-full">
       <!-- Desktop Menu -->
       <div class="hidden md:flex space-x-8">
-        <a routerLink="/board" routerLinkActive="active"
-           class="hover:text-yellow-400">Board</a>
-        <a routerLink="/about" routerLinkActive="active"
-           class="hover:text-yellow-400">About</a>
-        <a routerLink="/contact" routerLinkActive="active"
-           class="hover:text-yellow-400">Contact</a>
+        <a routerLink="/board" routerLinkActive="active" class="hover:text-yellow-400">Board</a>
+        <a routerLink="/about" routerLinkActive="active" class="hover:text-yellow-400">About</a>
+        <a routerLink="/contact" routerLinkActive="active" class="hover:text-yellow-400">Contact</a>
       </div>
 
       <!-- Mobile Hamburger -->
@@ -23,8 +20,7 @@
         <button (click)="toggleMenu()" class="focus:outline-none">
           <!-- Icon -->
           <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-              d="M4 6h16M4 12h16M4 18h16"/>
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
           </svg>
         </button>
       </div>
@@ -33,11 +29,24 @@
 
   <!-- Mobile Menu -->
   <div *ngIf="isMenuOpen" class="md:hidden bg-gray-900 px-2 pt-2 pb-3 space-y-2">
-    <a routerLink="/board" routerLinkActive="active"
-       class="block hover:text-yellow-400">Board</a>
-    <a routerLink="/about" routerLinkActive="active"
-       class="block hover:text-yellow-400">About</a>
-    <a routerLink="/contact" routerLinkActive="active"
-       class="block hover:text-yellow-400">Contact</a>
+    <a routerLink="/board" routerLinkActive="active" class="block hover:text-yellow-400">Board</a>
+    <a routerLink="/about" routerLinkActive="active" class="block hover:text-yellow-400">About</a>
+    <a routerLink="/contact" routerLinkActive="active" class="block hover:text-yellow-400">Contact</a>
   </div>
-  </nav>
+</nav>
+<div class="w-full bg-cyan-700 py-10 flex flex-col items-center justify-center space-y-6">
+
+  <!-- Status Text -->
+  <p class="text-2xl sm:text-3xl md:text-4xl font-extrabold text-white text-center">
+    {{ isOnline ? '✅ You are Online' : '❌ You are Offline' }}
+  </p>
+
+  <!-- Toggle Button -->
+  <button 
+    (click)="isOnline = !isOnline"
+    class="bg-blue-600 hover:bg-blue-800 text-white font-semibold px-6 sm:px-10 py-3 sm:py-4 
+           rounded-2xl text-lg sm:text-xl md:text-2xl shadow-lg transition-transform transform hover:scale-105">
+    {{ isOnline ? 'Go Offline' : 'Go Online' }}
+  </button>
+
+</div>

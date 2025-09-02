@@ -11,3 +11,34 @@
     </li>
   </ul>
 </div>
+ <div class="px-4 sm:px-10 md:px-20 lg:px-32 pt-5 space-y-5">
+  <!-- Button + Counter -->
+  <div class="flex flex-col items-center space-y-4">
+    <button 
+      (click)="increment()" 
+      class="bg-green-500 text-white text-xl sm:text-2xl px-4 py-2 rounded-lg flex justify-center hover:bg-green-700 transition">
+      Click me
+    </button>
+    <p class="text-white text-2xl sm:text-3xl md:text-4xl font-bold text-center">
+      {{count}}
+    </p>
+  </div>
+
+  <div class="flex flex-col items-center space-y-3">
+    <input 
+      [(ngModel)]="city" 
+      type="text"
+      placeholder="Enter City Name"
+      class="p-2 w-full max-w-md border border-white rounded-lg text-lg sm:text-xl md:text-2xl bg-transparent text-white focus:outline-none focus:ring-2 focus:ring-green-400">
+    
+    <p class="text-white text-lg sm:text-2xl md:text-3xl font-semibold">
+      {{city}}
+    </p>
+  </div>
+</div>
+<div class=" flex justify-center mt-10 mb-10">
+   <p [class.text-yellow-400]="isHighlighted"
+   [class.text-gray-500]="!isHighlighted" 
+   class="text-xl font-bold">This is class Binidng Example </p>
+   <button (click)="toggleHighlight()" class="bg-blue-500 text-white px-5 py-2 mb-4 mt-10 rounded-lg text-xl sm:text-3xl md:text-4xl text-center hover:bg-blue-700 transition">
+    Toggle</button>

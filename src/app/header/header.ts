@@ -13,4 +13,13 @@ export class Header {
  toggleMenu(){
   this.isMenuOpen=!this.isMenuOpen;
  }
-}
+   //directives for ngIf
+   isOnline=false;
+  toggleonline(){
+    this.isOnline=!this.isOnline;
+    }
+
+
+
+  }
+  

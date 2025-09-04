@@ -1,0 +1,49 @@
+<div class="min-h-screen  bg-gradient-to-r from-indigo-900 via-purple-900 to-indigo-900 py-6">
+
+  <div [ngSwitch]="selectedRole" >
+    <p *ngSwitchCase="'admin';"
+    class="text-white text-3xl font-bold text-center sm:text-xl md:text-2xl lg:text-3xl xl:text-4xl"
+    > Welcome To Admin page! you can Access all of Information</p>
+  <p *ngSwitchCase="'user';"
+  class="text-red-500 text-3xl font-bold text-center sm:text-xl md:text-2xl lg:text-3xl xl:text-4xl"
+  >
+    Welcome to User page! you can Access your Information.
+  </p>
+  <p *ngSwitchCase="'guest';"
+  class="text-yellow-500 text-3xl font-bold text-center sm:text-xl md:text-2xl lg:text-3xl xl:text-4xl">
+    Welcome to Guest page! you can Access limited Information.
+  </p>
+    <div class="flex flex-col sm:flex-row justify-center items-center space-y-4 sm:space-y-0 sm:space-x-6 py-7 px-5 pt-30">
+
+ 
+  <button (click)="setRole('admin')"
+  class="bg-green-500 hover:bg-green-700 text-white font-bold px-6 py-3 sm:px-8 sm:py-4
+                 text-xl sm:text-2xl md:text-3xl lg:text-4xl rounded-lg shadow-lg 
+                 transition-transform transform hover:scale-105">
+    Admin
+  </button>
+
+  <button (click)="setRole('user')"
+   class="bg-blue-500 hover:bg-blue-700 text-white font-bold px-6 py-3 sm:px-8 sm:py-4
+                 text-xl sm:text-2xl md:text-3xl lg:text-4xl rounded-lg shadow-lg 
+                 transition-transform transform hover:scale-105">
+    User
+  </button>
+
+
+  <button (click)="setRole('guest')"
+  class="bg-gray-500 hover:bg-gray-700 text-white font-bold px-6 py-3 sm:px-8 sm:py-4
+                 text-xl sm:text-2xl md:text-3xl lg:text-4xl rounded-lg shadow-lg 
+                 transition-transform transform hover:scale-105">
+    Guest
+  </button>
+
+</div>
+
+
+
+
+
+
+  </div>
+</div>

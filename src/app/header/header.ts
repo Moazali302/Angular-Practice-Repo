@@ -1,25 +1,31 @@
 import { Component } from '@angular/core';
-import { NgIf } from '@angular/common';
+import { NgIf, NgClass } from '@angular/common';
+import { Router, RouterLink, RouterLinkActive } from '@angular/router';
+
 @Component({
   selector: 'app-header',
-  imports: [NgIf],
+  standalone: true,
+  imports: [NgIf, NgClass, RouterLink, RouterLinkActive],
   templateUrl: './header.html',
-  styleUrl: './header.css'
+  styleUrls: ['./header.css']
 })
 export class Header {
- imgUrl = "https://angular.io/assets/images/logos/angular/angular.png";
- isMenuOpen=false;
+  imgUrl = "https://angular.io/assets/images/logos/angular/angular.png";
+  isMenuOpen = false;
+  isOnline = false;
 
- toggleMenu(){
-  this.isMenuOpen=!this.isMenuOpen;
- }
-   //directives for ngIf
-   isOnline=false;
-  toggleonline(){
-    this.isOnline=!this.isOnline;
-    }
+  constructor(public router: Router) {}
 
-
-
+  toggleMenu() {
+    this.isMenuOpen = !this.isMenuOpen;
   }
-  
+
+  toggleonline() {
+    this.isOnline = !this.isOnline;
+  }
+
+  // check current route
+  get showOnlineSection(): boolean {
+    return this.router.url === '/home' || this.router.url === '/';
+  }
+}

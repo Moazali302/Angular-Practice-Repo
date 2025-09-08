@@ -1,18 +1,16 @@
-import { Component } from '@angular/core';
-import { NgForOf } from '@angular/common';
-import { FormsModule } from '@angular/forms';
-import { NgFor } from '@angular/common';
-import { NgIf } from '@angular/common';
+import { Component, OnInit } from '@angular/core';
+import { NgForOf, NgFor, NgIf } from '@angular/common';
+import { FormControl, FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-home',
-  imports: [NgForOf, FormsModule, NgFor,NgIf],
+  imports: [NgForOf, FormsModule, NgFor,NgIf,ReactiveFormsModule],
   templateUrl: './home.html',
   styleUrl: './home.css'
 })
-export class Home {
+export class Home implements OnInit {
     tasks = ['Learn Angular', 'Install Tailwind', 'Build Taskboard'];
-   name="Muaz Ali ";
+   name:string ="";
    imgUrl="https://cdn.pixabay.com/photo/2017/02/26/00/05/cranium-2099129_1280.png";
    count=0;
 
@@ -49,4 +47,5 @@ export class Home {
       saveTasks(){
         localStorage.setItem('tasks',JSON.stringify(this.lists));
 }
+
 }

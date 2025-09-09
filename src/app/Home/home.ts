@@ -1,10 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { NgForOf, NgFor, NgIf } from '@angular/common';
 import { FormControl, FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { Contact } from "../contact/contact";
+import { Register } from '../register/register';
 
 @Component({
   selector: 'app-home',
-  imports: [NgForOf, FormsModule, NgFor,NgIf,ReactiveFormsModule],
+  imports: [NgForOf, FormsModule, NgFor, NgIf, ReactiveFormsModule, Contact,Register],
   templateUrl: './home.html',
   styleUrl: './home.css'
 })
@@ -47,5 +49,15 @@ export class Home implements OnInit {
       saveTasks(){
         localStorage.setItem('tasks',JSON.stringify(this.lists));
 }
+
+userData:any;
+
+onFormdata(data:{email:string,password:string}){
+  this.userData=data;
+}
+
+
+
+
 
 }

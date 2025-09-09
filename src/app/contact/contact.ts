@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, EventEmitter, Output } from '@angular/core';
 import { TitleStrategy } from '@angular/router';
 import { FormsModule } from "@angular/forms";
 
@@ -9,13 +9,13 @@ import { FormsModule } from "@angular/forms";
   templateUrl: './contact.html',
   styleUrls: ['./contact.css']
 })
-export class Contact {
-  
-  name:string="";
+export class Contact { 
+  name :string="";
   phone:string='';
   email:string='';
   message:string='';
 
+   
   onSubmit(){
     const userData={
       name:this.name,
@@ -36,9 +36,9 @@ export class Contact {
     this.message='';
 
     alert("Your message has been saved in locally");
-  }
-   
-  marks:string="";
-
+    
  
+  }
+
 }
+

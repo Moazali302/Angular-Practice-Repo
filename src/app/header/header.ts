@@ -1,11 +1,12 @@
 import { Component } from '@angular/core';
 import { NgIf, NgClass } from '@angular/common';
 import { Router, RouterLink, RouterLinkActive } from '@angular/router';
+import { UserRole } from "../UserRole/user-role";
 
 @Component({
   selector: 'app-header',
   standalone: true,
-  imports: [NgIf, NgClass, RouterLink, RouterLinkActive],
+  imports: [NgIf, NgClass, RouterLink, RouterLinkActive, UserRole],
   templateUrl: './header.html',
   styleUrls: ['./header.css']
 })
@@ -28,4 +29,17 @@ export class Header {
   get showOnlineSection(): boolean {
     return this.router.url === '/home' || this.router.url === '/';
   }
+   showGuest=false;
+
+   onSelectedRole(role:string){
+    if(role==='guest'){
+      this.showGuest=true;
+    }
+   }
+
+
+
+
+
+
 }

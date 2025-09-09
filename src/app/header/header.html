@@ -15,6 +15,9 @@
      class="text-white hover:text-yellow-400 transition font-medium">User Role</a>
   <a routerLink="/contact" routerLinkActive="text-yellow-400"
      class="text-white hover:text-yellow-400 transition font-medium">Contact</a>
+       <a routerLink="/register" routerLinkActive="text-yellow-400"
+     class="text-white hover:text-yellow-400 transition font-medium">Register</a>
+</div>
 </div>
 
 <!-- Mobile Hamburger -->
@@ -27,20 +30,26 @@
   </button>
 </div>
 </div>
-</div>
 
 <!-- Mobile Menu -->
 <div *ngIf="isMenuOpen"
      class="md:hidden bg-gradient-to-r from-gray-900 via-blue-900 to-gray-900 px-2 pt-2 pb-3 space-y-2">
+
   <a routerLink="/home" routerLinkActive="text-yellow-400"
      class="block text-white hover:text-yellow-400 transition font-medium"
      (click)="isMenuOpen=false">Home</a>
+
   <a routerLink="/user-role" routerLinkActive="text-yellow-400"
      class="block text-white hover:text-yellow-400 transition font-medium"
      (click)="isMenuOpen=false">User Role</a>
+
   <a routerLink="/contact" routerLinkActive="text-yellow-400"
      class="block text-white hover:text-yellow-400 transition font-medium"
      (click)="isMenuOpen=false">Contact</a>
+     
+       <a routerLink="/register" routerLinkActive="text-yellow-400"
+     class="block text-white hover:text-yellow-400 transition font-medium"
+     (click)="isMenuOpen=false">Register</a>
 </div>
 </nav>
 <div *ngIf="showOnlineSection" class="w-full bg-gradient-to-r from-purple-700 via-indigo-800 to-purple-900

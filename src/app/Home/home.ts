@@ -3,6 +3,8 @@ import { NgForOf, NgFor, NgIf } from '@angular/common';
 import { FormControl, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { Contact } from "../contact/contact";
 import { Register } from '../register/register';
+import { RoleService } from '../role-service';
+import { TitleStrategy } from '@angular/router';
 
 @Component({
   selector: 'app-home',
@@ -55,8 +57,20 @@ userData:any;
 onFormdata(data:{email:string,password:string}){
   this.userData=data;
 }
-
-
+  newRole:string="";
+ role:string=''
+    constructor(private roleservice:RoleService){
+      this.roleservice.$currentRole.subscribe(role=>{
+    this.role=role;
+      })
+    }
+    updateRole(){
+      this.roleservice.setRole("Admin");
+    }
+    inputRole(){
+      this.roleservice.setRole(this.newRole);
+      this.newRole='';
+    }
 
 
 

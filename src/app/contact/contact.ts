@@ -1,6 +1,8 @@
 import { Component, EventEmitter, Output } from '@angular/core';
 import { TitleStrategy } from '@angular/router';
 import { FormsModule } from "@angular/forms";
+import { RoleService } from '../role-service';
+import { setThrowInvalidWriteToSignalError } from '@angular/core/primitives/signals';
 
 @Component({
   selector: 'app-contact',
@@ -39,6 +41,12 @@ export class Contact {
     
  
   }
+  role:string="";
+   constructor(private roleservice:RoleService){
+    this.roleservice.$currentRole.subscribe(role=>{
+     this.role=role;
+    })
+   }
 
 }
 

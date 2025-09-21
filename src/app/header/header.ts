@@ -2,11 +2,12 @@ import { Component } from '@angular/core';
 import { NgIf, NgClass } from '@angular/common';
 import { Router, RouterLink, RouterLinkActive } from '@angular/router';
 import { UserRole } from "../UserRole/user-role";
+import { DatePipe } from '@angular/common';
 
 @Component({
   selector: 'app-header',
   standalone: true,
-  imports: [NgIf, NgClass, RouterLink, RouterLinkActive, UserRole],
+  imports: [NgIf, NgClass, RouterLink, RouterLinkActive, UserRole,DatePipe],
   templateUrl: './header.html',
   styleUrls: ['./header.css']
 })
@@ -14,6 +15,7 @@ export class Header {
   imgUrl = "https://angular.io/assets/images/logos/angular/angular.png";
   isMenuOpen = false;
   isOnline = false;
+  today=new Date();
 
   constructor(public router: Router) {}
 

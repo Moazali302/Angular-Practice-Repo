@@ -60,6 +60,9 @@
      class="text-2xl sm:text-3xl md:text-4xl font-extrabold text-center">
     {{ isOnline ? '✅ You are Online' : '❌ You are Offline' }}
   </p>
+  <p class="text-white text-xl "> {{today |date:'fullDate' }}</p>
+  <p class="text-white text-2xl"> {{today|date:'hh:mm: a '}}</p>
+
 
   <button (click)="toggleonline()"
     class="bg-blue-600 hover:bg-blue-800 text-white font-semibold px-6 sm:px-6 py-3 sm:py-4 

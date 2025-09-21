@@ -120,4 +120,68 @@
 </div>
 
 <br>
+<h2 class="text-center text-2xl md:text-3xl lg:text-4xl font-bold text-red-500 mb-6">
+  Display Currency Using Pipe
+</h2>
+
+<div
+  class="bg-gradient-to-r from-blue-200 via-blue-300 to-blue-400 text-gray-900 shadow-lg rounded-2xl p-6 md:p-8 w-full max-w-2xl mx-auto">
+
+  <p class="text-lg md:text-xl font-medium mb-4">
+    The Fees of <span class="font-semibold text-indigo-700">Full Stack Developer</span> in Pakistan is:
+    <strong class="block text-2xl md:text-3xl text-green-700 mt-2">
+      {{ fees | currency:'PKR':'symbol':'1.2-2' }}
+    </strong>
+  </p>
+
+  <p class="text-lg md:text-xl font-medium">
+    USD Students Fees is:
+    <strong class="block text-2xl md:text-3xl text-purple-700 mt-2">
+      {{ fees | currency:'USD':'code':'1.0-0' }}
+    </strong>
+  </p>
+
+</div>
+<div class="min-h-screen bg-gradient-to-r from-gray-900 via-blue-900 to-gray-900 flex items-center justify-center p-6">
+  <div class="max-w-2xl w-full bg-gray-800/80 backdrop-blur-md shadow-xl rounded-2xl p-6 border border-gray-700">
+    <h2 class="text-2xl md:text-3xl font-bold text-center text-blue-400 mb-6">
+      Display Name using Slice Pipe
+    </h2>
+
+    <!-- All Students -->
+    <div class="mb-6">
+      <h1 class="text-xl font-semibold text-gray-200 mb-3">All Students Name</h1>
+      <ul class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+        <li *ngFor="let s of students"
+          class="bg-blue-950/60 text-blue-300 font-medium py-2 px-4 rounded-lg shadow-sm hover:bg-blue-800/70 hover:text-white transition">
+          {{ s }}
+        </li>
+      </ul>
+    </div>
+
+    <!-- Top 3 Students -->
+    <div class="mb-6">
+      <h3 class="text-lg font-semibold text-gray-200 mb-3">Top 3 Students:</h3>
+      <ul class="flex flex-wrap gap-3">
+        <li *ngFor="let s of students | slice:0:3"
+          class="bg-green-900/60 text-green-300 font-medium py-2 px-4 rounded-full shadow hover:bg-green-800 hover:text-white transition">
+          {{ s }}
+        </li>
+      </ul>
+    </div>
+
+    <!-- Top First Student -->
+    <div>
+      <h2 class="text-lg font-semibold text-gray-200 mb-3">Top First Student:</h2>
+      <ul>
+        <li *ngFor="let s of students | slice:0:1"
+          class="bg-yellow-900/70 text-yellow-300 text-center font-bold py-3 px-4 rounded-xl shadow-md hover:bg-yellow-800 hover:text-white transition">
+          {{ s }}
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+
 <app-contact></app-contact>

@@ -5,10 +5,13 @@ import { Contact } from "../contact/contact";
 import { Register } from '../register/register';
 import { RoleService } from '../role-service';
 import { TitleStrategy } from '@angular/router';
-
+import { CurrencyPipe } from '@angular/common';
+import { UpperCasePipe } from '@angular/common';
+import { SlicePipe } from '@angular/common';
 @Component({
   selector: 'app-home',
-  imports: [NgForOf, FormsModule, NgFor, NgIf, ReactiveFormsModule, Contact,Register],
+  imports: [NgForOf, FormsModule, NgFor, NgIf, ReactiveFormsModule,
+     Contact,Register,SlicePipe,CurrencyPipe],
   templateUrl: './home.html',
   styleUrl: './home.css'
 })
@@ -17,6 +20,7 @@ export class Home implements OnInit {
    name:string ="";
    imgUrl="https://cdn.pixabay.com/photo/2017/02/26/00/05/cranium-2099129_1280.png";
    count=0;
+   fees=50000.24;
 
    increment(){
     this.count++;
@@ -69,9 +73,10 @@ onFormdata(data:{email:string,password:string}){
     }
     inputRole(){
       this.roleservice.setRole(this.newRole);
-      this.newRole='';
+      this.newRole='';   
     }
 
-
+  students :string[]=[
+    'Ahmad','Faisal','Muaz','Adil','Noman','wahab','Ali','Usman'];
 
 }

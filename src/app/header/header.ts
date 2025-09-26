@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { NgIf, NgClass } from '@angular/common';
 import { Router, RouterLink, RouterLinkActive } from '@angular/router';
 import { UserRole } from "../UserRole/user-role";
@@ -8,6 +8,7 @@ import { DatePipe } from '@angular/common';
   selector: 'app-header',
   standalone: true,
   imports: [NgIf, NgClass, RouterLink, RouterLinkActive, UserRole,DatePipe],
+  changeDetection:ChangeDetectionStrategy.OnPush,
   templateUrl: './header.html',
   styleUrls: ['./header.css']
 })

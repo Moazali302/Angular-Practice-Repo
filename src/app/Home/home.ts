@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { NgForOf, NgFor, NgIf } from '@angular/common';
 import { FormControl, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { Contact } from "../contact/contact";
@@ -7,11 +7,14 @@ import { RoleService } from '../role-service';
 import { TitleStrategy } from '@angular/router';
 import { CurrencyPipe } from '@angular/common';
 import { UpperCasePipe } from '@angular/common';
+import { HttpBackend, HttpRequest, httpResource } from '@angular/common/http';
 import { SlicePipe } from '@angular/common';
+import { TruncatePipe } from '../truncate-pipe';
 @Component({
   selector: 'app-home',
   imports: [NgForOf, FormsModule, NgFor, NgIf, ReactiveFormsModule,
-     Contact,Register,SlicePipe,CurrencyPipe],
+    Contact, Register, SlicePipe, CurrencyPipe,TruncatePipe, UpperCasePipe],
+    changeDetection:ChangeDetectionStrategy.OnPush,
   templateUrl: './home.html',
   styleUrl: './home.css'
 })
@@ -21,6 +24,7 @@ export class Home implements OnInit {
    imgUrl="https://cdn.pixabay.com/photo/2017/02/26/00/05/cranium-2099129_1280.png";
    count=0;
    fees=50000.24;
+  http: any;
 
    increment(){
     this.count++;
@@ -78,5 +82,7 @@ onFormdata(data:{email:string,password:string}){
 
   students :string[]=[
     'Ahmad','Faisal','Muaz','Adil','Noman','wahab','Ali','Usman'];
+
+    allValue:string="Hello Welcome to Angular Custom Pipe";
 
 }

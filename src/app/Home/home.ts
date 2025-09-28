@@ -13,7 +13,7 @@ import { TruncatePipe } from '../truncate-pipe';
 @Component({
   selector: 'app-home',
   imports: [NgForOf, FormsModule, NgFor, NgIf, ReactiveFormsModule,
-    Contact, Register, SlicePipe, CurrencyPipe,TruncatePipe, UpperCasePipe],
+    Contact, Register, SlicePipe, CurrencyPipe,TruncatePipe],
     changeDetection:ChangeDetectionStrategy.OnPush,
   templateUrl: './home.html',
   styleUrl: './home.css'

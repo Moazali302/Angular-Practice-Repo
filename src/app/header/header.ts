@@ -7,7 +7,7 @@ import { DatePipe } from '@angular/common';
 @Component({
   selector: 'app-header',
   standalone: true,
-  imports: [NgIf, NgClass, RouterLink, RouterLinkActive, UserRole,DatePipe],
+  imports: [NgIf, NgClass, RouterLink, RouterLinkActive,DatePipe],
   changeDetection:ChangeDetectionStrategy.OnPush,
   templateUrl: './header.html',
   styleUrls: ['./header.css']

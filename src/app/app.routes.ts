@@ -1,16 +1,33 @@
 import { Routes } from '@angular/router';
-import { Home } from './Home/home';
-import { UserRole } from './UserRole/user-role';
-import { Contact } from './contact/contact';
-import { Register } from './register/register';
-import { Products } from './products/products';
+import { Home } from './Home/home'; // Home ko eager rakhenge
 
 export const routes: Routes = [
-  { path: '', redirectTo: 'home', pathMatch: 'full' }, 
+  { path: '', redirectTo: 'home', pathMatch: 'full' },
   { path: 'home', component: Home },
-  { path: 'products', component: Products },
-  { path: 'user-role', component: UserRole },
-  { path: 'contact', component: Contact },
-  { path: 'register', component: Register },
-  { path: '**', redirectTo: 'home' } 
+  {
+    path: 'products',
+    loadComponent: () =>
+      import('./products/products').then(m => m.Products),
+  },
+  {
+    path: 'user-role',
+    loadComponent: () =>
+      import('./UserRole/user-role').then(m => m.UserRole),
+  },
+  {
+    path: 'contact',
+    loadComponent: () =>
+      import('./contact/contact').then(m => m.Contact),
+  },
+  {
+    path: 'register',
+    loadComponent: () =>
+      import('./register/register').then(m => m.Register),
+  },
+  {
+    path: 'signup',
+    loadComponent: () =>
+      import('./signup/signup').then(m => m.Signup),
+  },
+  { path: '**', redirectTo: 'home' },
 ];

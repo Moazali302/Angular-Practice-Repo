@@ -20,9 +20,9 @@ export const routes: Routes = [
       import('./contact/contact').then(m => m.Contact),
   },
   {
-    path: 'register',
-    loadComponent: () =>
-      import('./register/register').then(m => m.Register),
+    path: 'profile',
+    loadComponent:()=>
+      import('./profile/profile').then(m=>m.Profile),
   },
   {
     path: 'signup',

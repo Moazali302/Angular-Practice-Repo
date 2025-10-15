@@ -2,7 +2,6 @@ import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { NgForOf, NgFor, NgIf } from '@angular/common';
 import { FormControl, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { Contact } from "../contact/contact";
-import { Register } from '../register/register';
 import { RoleService } from '../role-service';
 import { TitleStrategy } from '@angular/router';
 import { CurrencyPipe } from '@angular/common';
@@ -13,7 +12,7 @@ import { TruncatePipe } from '../truncate-pipe';
 @Component({
   selector: 'app-home',
   imports: [NgForOf, FormsModule, NgFor, NgIf, ReactiveFormsModule,
-    Contact, Register, SlicePipe, CurrencyPipe,TruncatePipe],
+    Contact,SlicePipe, CurrencyPipe,TruncatePipe],
     changeDetection:ChangeDetectionStrategy.OnPush,
   templateUrl: './home.html',
   styleUrl: './home.css'

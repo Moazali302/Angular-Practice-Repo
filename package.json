@@ -1,11 +1,16 @@
 {
   "name": "angular-app",
   "version": "0.0.0",
+  "private": true,
+  "description": "Angular Practice Repository",
+  "main": "index.js",
   "scripts": {
     "ng": "ng",
-    "start": "ng serve",
+    "start": "ng serve --port 4201",
     "build": "ng build",
-    "test": "ng test"
+    "test": "ng test",
+    "start:backend": "cd Backend && nodemon server.js",
+    "dev": "concurrently \"ng serve --port 4201\" \"cd Backend && nodemon server.js\""
   },
   "prettier": {
     "printWidth": 100,
@@ -19,7 +24,6 @@
       }
     ]
   },
-  "private": true,
   "dependencies": {
     "@angular/common": "^20.3.2",
     "@angular/compiler": "^20.3.2",
@@ -30,8 +34,10 @@
     "@tailwindcss/postcss": "^4.1.12",
     "postcss": "^8.5.6",
     "rxjs": "~7.8.0",
+    "sweetalert2": "^11.26.2",
     "tailwindcss": "^4.1.12",
-    "tslib": "^2.8.1"
+    "tslib": "^2.8.1",
+    "zone.js": "^0.15.1"
   },
   "devDependencies": {
     "@angular/build": "^20.3.3",
@@ -39,12 +45,25 @@
     "@angular/compiler-cli": "^20.3.2",
     "@types/jasmine": "~5.1.0",
     "@types/node": "^20.17.19",
+    "concurrently": "^8.2.2",
     "jasmine-core": "~5.9.0",
     "karma": "~6.4.0",
     "karma-chrome-launcher": "~3.2.0",
     "karma-coverage": "~2.2.0",
     "karma-jasmine": "~5.1.0",
     "karma-jasmine-html-reporter": "~2.1.0",
+    "nodemon": "^3.1.10",
     "typescript": "~5.9.2"
-  }
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Moazali302/Angular-Practice-Repo.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Moazali302/Angular-Practice-Repo/issues"
+  },
+  "homepage": "https://github.com/Moazali302/Angular-Practice-Repo#readme"
 }

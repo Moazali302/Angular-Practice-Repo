@@ -10,10 +10,9 @@ import { DatePipe } from '@angular/common';
   imports: [NgIf, NgClass, RouterLink, RouterLinkActive,DatePipe],
   changeDetection:ChangeDetectionStrategy.OnPush,
   templateUrl: './header.html',
-  styleUrls: ['./header.css']
+  styleUrl:'./header.css'
 })
 export class Header {
-  imgUrl = "https://angular.io/assets/images/logos/angular/angular.png";
   isMenuOpen = false;
   isOnline = false;
   today=new Date();

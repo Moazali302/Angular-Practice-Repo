@@ -1,11 +1,19 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { UserService } from '../user-service';
+import { UpperCasePipe } from '@angular/common';
+
 
 @Component({
   selector: 'app-profile',
-  imports: [],
+  imports: [UpperCasePipe],
   templateUrl: './profile.html',
-  styleUrl: './profile.css'
+  styleUrls: ['./profile.css']
 })
-export class Profile {
+export class Profile  implements OnInit{
+  user:any;
+  constructor(private userService:UserService){}
 
+  ngOnInit(){
+  this.user=this.userService.getUser();
+  }
 }

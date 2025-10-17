@@ -1,9 +1,13 @@
 import { Routes } from '@angular/router';
-import { Home } from './Home/home'; // Home ko eager rakhenge
+import { Home } from './Home/home';
+import { SignupComponent } from './signup/signup'; // Home ko eager rakha gaya hai
 
 export const routes: Routes = [
-  { path: '', redirectTo: 'home', pathMatch: 'full' },
+  // App start hone par signup page open
+  { path: '', redirectTo: 'signup', pathMatch: 'full' },
+
   { path: 'home', component: Home },
+
   {
     path: 'products',
     loadComponent: () =>
@@ -21,13 +25,20 @@ export const routes: Routes = [
   },
   {
     path: 'profile',
-    loadComponent:()=>
-      import('./profile/profile').then(m=>m.Profile),
+    loadComponent: () =>
+      import('./profile/profile').then(m => m.Profile),
   },
   {
     path: 'signup',
     loadComponent: () =>
-      import('./signup/signup').then(m => m.Signup),
+      import('./signup/signup').then(m => m.SignupComponent),
   },
-  { path: '**', redirectTo: 'home' },
+  {
+    path: 'login',
+    loadComponent: () =>
+      import('./login/login').then(m => m.Login),
+  },
+
+  // Agar koi wrong route aaye to redirect to signup
+  { path: '**', redirectTo: 'signup' },
 ];

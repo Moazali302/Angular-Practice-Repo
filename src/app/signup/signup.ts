@@ -1,46 +1,72 @@
 import { Component } from '@angular/core';
-import { FormArray, FormControl, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
+import { HttpClient } from '@angular/common/http';
+import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
+import { RouterLink } from '@angular/router';
+import { RouterModule } from '@angular/router';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-signup',
   standalone: true,
-  imports: [ReactiveFormsModule, CommonModule],
-  templateUrl: './signup.html',
-  styleUrls: ['./signup.css']
+  imports: [CommonModule,RouterModule,RouterLink, ReactiveFormsModule],
+  templateUrl: './signup.html'
 })
-export class Signup {
-  signupForm = new FormGroup({
-    username: new FormControl('', Validators.required),
-    email: new FormControl('', [Validators.required, Validators.email]),
-    password: new FormControl('', [Validators.required, Validators.minLength(8)]),
-    confirmPassword: new FormControl('', [Validators.required, Validators.minLength(8)]),
-    skills: new FormArray([new FormControl('Angular')])
-  });
+export class SignupComponent {
+  signupForm: FormGroup;
+  loading = false;
+  showPassword = false;
 
-  
-  get skills() {
-    return this.signupForm.get('skills') as FormArray;
+  constructor(private http: HttpClient, private fb: FormBuilder, private router: Router) {
+    this.signupForm = this.fb.group({
+      name: ['', Validators.required],
+      email: ['', [Validators.required, Validators.email]],
+      city: ['', Validators.required],
+      password: ['', [Validators.required, Validators.minLength(6)]],
+    });
   }
 
-  addSkill() {
-    this.skills.push(new FormControl(''));
+  togglePassword() {
+    this.showPassword = !this.showPassword;
   }
 
-  removeSkill(i: number) {
-    this.skills.removeAt(i);
-  }
+  signup() {
+    if (this.signupForm.invalid) {
+      this.signupForm.markAllAsTouched();
+      return;
+    }
 
-  onSubmit() {
-  if (this.signupForm.valid) {
-  
-    localStorage.setItem('signupData', JSON.stringify(this.signupForm.value));
-    console.log('Saved to localStorage:', this.signupForm.value);
-    alert('Signup successful! Data saved to localStorage.');
-    this.signupForm.reset();
-    this.skills.clear();
-    this.skills.push(new FormControl(''));  
+    this.loading = true;
+    this.http.post('http://localhost:3000/api/auth/signup', this.signupForm.value)
+      .subscribe({
+        next: () => {
+          this.loading = false;
+          Swal.fire({
+            icon: 'success',
+            title: 'Account Created Successfully 🎉',
+            text: 'You can now login to your account',
+            timer: 3000,        // 3 seconds auto-close
+            timerProgressBar: true,
+            showConfirmButton: false,
+            position: 'top',
+          }).then(() => {
+            this.signupForm.reset();
+            this.router.navigate(['/login']);
+          });
+        },
+        error: err => {
+          this.loading = false;
+          Swal.fire({
+            icon: 'error',
+            title: 'Signup Failed',
+            text: err.error.message || 'Something went wrong!',
+            timer: 3000,        // 3 seconds auto-close
+            timerProgressBar: true,
+            showConfirmButton: false,
+            position: 'top',
+          });
+        },
+      });
   }
-}
-
 }

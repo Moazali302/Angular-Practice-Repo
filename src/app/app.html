@@ -1,10 +1,7 @@
-<app-header></app-header>
+<app-header *ngIf="showLayout()"></app-header>
 
-<main class="min-h-screen  scroll-auto
-bg-gradient-to-r from-gray-900 via-blue-900 to-gray-900
-">
-  <!-- Yahan route ke components load honge -->
+<main class="min-h-screen bg-gradient-to-r from-gray-900 via-blue-900 to-gray-900">
   <router-outlet></router-outlet>
 </main>
 
-<app-footer></app-footer>
+<app-footer *ngIf="showLayout()"></app-footer>

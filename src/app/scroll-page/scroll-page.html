@@ -1,0 +1,10 @@
+<div class="space-y-6">
+  <div
+    *ngFor="let item of items; let i = index"
+    [class.opacity-0]="i >= visibleItems"
+    [class.opacity-100]="i < visibleItems"
+    class="transition-opacity duration-700 bg-gradient-to-r from-blue-600 to-blue-800 text-white p-6 rounded-xl shadow-lg"
+  >
+    {{ item }}
+  </div>
+</div>

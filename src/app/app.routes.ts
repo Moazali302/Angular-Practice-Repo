@@ -1,33 +1,52 @@
 import { Routes } from '@angular/router';
 import { Home } from './Home/home';
-import { SignupComponent } from './signup/signup'; // Home ko eager rakha gaya hai
+import { AuthGuard } from './auth-guard';
 
 export const routes: Routes = [
-  // App start hone par signup page open
   { path: '', redirectTo: 'signup', pathMatch: 'full' },
 
-  { path: 'home', component: Home },
+  { path: 'home', component: Home, canActivate: [AuthGuard] }, 
 
   {
     path: 'products',
     loadComponent: () =>
       import('./products/products').then(m => m.Products),
+    canActivate: [AuthGuard]
   },
+  
+
+  {
+    path: 'scroll-home',
+    loadComponent: () =>
+      import('./scroll-page/scroll-page').then(m => m.ScrollPage),
+    canActivate: [AuthGuard]
+  },
+  {
+    path: 'scroll-products',
+    loadComponent: () =>
+      import('./scroll-page/scroll-page').then(m => m.ScrollPage),
+    canActivate: [AuthGuard]
+  },
+
   {
     path: 'user-role',
     loadComponent: () =>
       import('./UserRole/user-role').then(m => m.UserRole),
+    canActivate: [AuthGuard]
   },
   {
     path: 'contact',
     loadComponent: () =>
       import('./contact/contact').then(m => m.Contact),
+    canActivate: [AuthGuard]
   },
   {
     path: 'profile',
     loadComponent: () =>
       import('./profile/profile').then(m => m.Profile),
+    canActivate: [AuthGuard] 
   },
+
   {
     path: 'signup',
     loadComponent: () =>
@@ -39,6 +58,5 @@ export const routes: Routes = [
       import('./login/login').then(m => m.Login),
   },
 
-  // Agar koi wrong route aaye to redirect to signup
-  { path: '**', redirectTo: 'signup' },
+  { path: '**', redirectTo: 'signup' }
 ];

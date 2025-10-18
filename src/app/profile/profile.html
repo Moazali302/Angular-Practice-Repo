@@ -5,7 +5,6 @@
     class="bg-gray-800/60 backdrop-blur-xl shadow-2xl rounded-2xl p-8 w-full max-w-lg border border-gray-700 text-gray-100"
   >
     <div class="flex flex-col items-center text-center">
-  
       <div
         class="relative w-28 h-28 mb-5 rounded-full bg-gradient-to-r from-blue-500 to-blue-700 flex items-center justify-center shadow-lg"
       >
@@ -24,7 +23,6 @@
         {{ user?.email || 'No email available' }}
       </p>
     </div>
-
 
     <div class="bg-gray-900/70 rounded-xl p-6 border border-gray-700">
       <h3 class="text-lg font-semibold text-blue-400 mb-4">
@@ -46,7 +44,6 @@
       </ul>
     </div>
 
- 
     <div class="mt-8 flex flex-col sm:flex-row gap-4">
       <button
         class="flex-1 py-3 rounded-xl bg-gradient-to-r from-blue-600 to-blue-800 hover:from-blue-700 hover:to-blue-900 text-white font-semibold shadow-lg hover:shadow-xl transition-all duration-300"
@@ -54,7 +51,7 @@
         Edit Profile
       </button>
       <button
-        routerLink="/login"
+        (click)="logout()"
         class="flex-1 py-3 rounded-xl bg-gray-700 hover:bg-gray-600 text-gray-100 font-semibold shadow-md hover:shadow-lg transition-all duration-300"
       >
         Logout

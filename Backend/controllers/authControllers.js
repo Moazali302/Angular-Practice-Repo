@@ -1,14 +1,11 @@
+const jwt = require('jsonwebtoken');
 const User = require('../models/user');
 
-// ✅ SIGNUP Controller
-const signupUser = async (req, res) => {
-    console.log("BODY RECEIVED:", req.body);
+const SECRET_KEY = "your_secret_key";
 
+const signupUser = async (req, res) => {
   try {
     const { name, email, password, city } = req.body;
-
-    console.log("📩 Incoming signup data:", req.body);
-
     if (!name || !email || !password || !city) {
       return res.status(400).json({ message: "All fields are required!" });
     }
@@ -21,32 +18,41 @@ const signupUser = async (req, res) => {
     const user = new User({ name, email, password, city });
     await user.save();
 
-    console.log(" created:", user);
-    res.json({ message: "Signup successful!", user });
-
+    res.json({ message: "Signup successful!" });
   } catch (error) {
-    console.error(" Signup Error:", error);
     res.status(500).json({ error: "Signup failed!", details: error.message });
   }
 };
 
-// ✅ LOGIN Controller
 const loginUser = async (req, res) => {
   try {
     const { email, password } = req.body;
-    console.log("📩 Login request:", req.body);
-
     const user = await User.findOne({ email, password });
-    if (!user) {
-      return res.status(401).json({ message: "Invalid credentials" });
-    }
 
-    res.json({ message: "Login successful!", user });
+    if (!user) return res.status(401).json({ message: "Invalid credentials" });
 
+    
+    const token = jwt.sign({ id: user._id }, SECRET_KEY, { expiresIn: "1h" });
+
+    res.json({ message: "Login successful!", token });
   } catch (error) {
-    console.error("❌ Login Error:", error);
     res.status(500).json({ error: "Login failed!", details: error.message });
   }
 };
 
-module.exports = { signupUser, loginUser };
+const getProfile = async (req, res) => {
+  try {
+    const token = req.headers.authorization?.split(' ')[1];
+    if (!token) return res.status(401).json({ message: "No token provided" });
+
+    const decoded = jwt.verify(token, SECRET_KEY);
+    const user = await User.findById(decoded.id).select("-password");
+    if (!user) return res.status(404).json({ message: "User not found" });
+
+    res.json({ user });
+  } catch (err) {
+    res.status(401).json({ message: "Invalid token" });
+  }
+};
+
+module.exports = { signupUser, loginUser, getProfile };

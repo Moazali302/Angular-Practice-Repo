@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnInit, ElementRef, AfterViewInit } from '@angular/core';
 import { NgForOf, NgFor, NgIf } from '@angular/common';
 import { FormControl, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { Contact } from "../contact/contact";
@@ -17,7 +17,7 @@ import { TruncatePipe } from '../truncate-pipe';
   templateUrl: './home.html',
   styleUrl: './home.css'
 })
-export class Home implements OnInit {
+export class Home implements OnInit, AfterViewInit {
     tasks = ['Learn Angular', 'Install Tailwind', 'Build Taskboard'];
    name:string ="";
    imgUrl="https://cdn.pixabay.com/photo/2017/02/26/00/05/cranium-2099129_1280.png";
@@ -64,20 +64,41 @@ userData:any;
 onFormdata(data:{email:string,password:string}){
   this.userData=data;
 }
-  newRole:string="";
- role:string=''
-    constructor(private roleservice:RoleService){
-      this.roleservice.$currentRole.subscribe(role=>{
-    this.role=role;
-      })
+  newRole: string = "";
+  role: string = '';
+  constructor(private roleservice: RoleService, private el: ElementRef) {
+    this.roleservice.$currentRole.subscribe(role => {
+      this.role = role;
+    })
+  }
+  updateRole() {
+    this.roleservice.setRole("Admin");
+  }
+  inputRole() {
+    this.roleservice.setRole(this.newRole);
+    this.newRole = '';
+  }
+
+  ngAfterViewInit(): void {
+    // Intersection Observer for scroll-based fade/slide animations
+    const sections = this.el.nativeElement.querySelectorAll('.reveal-on-scroll');
+    if ('IntersectionObserver' in window) {
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('opacity-100', 'translate-y-0');
+            entry.target.classList.remove('opacity-0', 'translate-y-8');
+            observer.unobserve(entry.target);
+          }
+        });
+      }, {
+        threshold: 0.15
+      });
+      sections.forEach((section: HTMLElement) => {
+        observer.observe(section);
+      });
     }
-    updateRole(){
-      this.roleservice.setRole("Admin");
-    }
-    inputRole(){
-      this.roleservice.setRole(this.newRole);
-      this.newRole='';   
-    }
+  }
 
   students :string[]=[
     'Ahmad','Faisal','Muaz','Adil','Noman','wahab','Ali','Usman'];

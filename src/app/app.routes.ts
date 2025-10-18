@@ -13,21 +13,6 @@ export const routes: Routes = [
       import('./products/products').then(m => m.Products),
     canActivate: [AuthGuard]
   },
-  
-
-  {
-    path: 'scroll-home',
-    loadComponent: () =>
-      import('./scroll-page/scroll-page').then(m => m.ScrollPage),
-    canActivate: [AuthGuard]
-  },
-  {
-    path: 'scroll-products',
-    loadComponent: () =>
-      import('./scroll-page/scroll-page').then(m => m.ScrollPage),
-    canActivate: [AuthGuard]
-  },
-
   {
     path: 'user-role',
     loadComponent: () =>

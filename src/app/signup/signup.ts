@@ -44,7 +44,7 @@ export class SignupComponent {
           this.loading = false;
           Swal.fire({
             icon: 'success',
-            title: 'Account Created Successfully 🎉',
+            title: 'Account Created Successfully ',
             text: 'You can now login to your account',
             timer: 3000,        // 3 seconds auto-close
             timerProgressBar: true,

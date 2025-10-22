@@ -1,37 +1,84 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
-import { RouterLink } from '@angular/router';
-import { RouterModule } from '@angular/router';
+import { Router, RouterLink, RouterModule } from '@angular/router';
 import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-signup',
   standalone: true,
-  imports: [CommonModule,RouterModule,RouterLink, ReactiveFormsModule],
+  imports: [CommonModule, RouterModule, RouterLink, ReactiveFormsModule],
   templateUrl: './signup.html'
 })
-export class SignupComponent {
-  signupForm: FormGroup;
+export class SignupComponent implements OnInit {
+  signupForm!: FormGroup;
   loading = false;
   showPassword = false;
 
-  constructor(private http: HttpClient, private fb: FormBuilder, private router: Router) {
+  countries: string[] = [];
+  cities: string[] = [];
+
+  constructor(private http: HttpClient, private fb: FormBuilder, private router: Router) {}
+
+  ngOnInit(): void {
     this.signupForm = this.fb.group({
       name: ['', Validators.required],
       email: ['', [Validators.required, Validators.email]],
+      country: ['', Validators.required],
       city: ['', Validators.required],
       password: ['', [Validators.required, Validators.minLength(6)]],
     });
+
+    this.loadCountries();
   }
 
-  togglePassword() {
+  // ✅ Load all countries
+  loadCountries(): void {
+    this.http.get<any>('https://countriesnow.space/api/v0.1/countries')
+      .subscribe({
+        next: (res) => {
+          this.countries = res.data.map((c: any) => c.country);
+          // set default Pakistan
+          this.signupForm.patchValue({ country: 'Pakistan' });
+          this.loadCities('Pakistan');
+        },
+        error: (err) => {
+          console.error('Failed to load countries:', err);
+        }
+      });
+  }
+
+  // ✅ On country select -> load cities
+  onCountryChange(event: Event): void {
+    const select = event.target as HTMLSelectElement;
+    const countryName = select.value;
+    if (countryName) {
+      this.signupForm.patchValue({ city: '' });
+      this.loadCities(countryName);
+    }
+  }
+
+  // ✅ Load cities based on country
+  loadCities(countryName: string): void {
+    const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
+    this.http.post<any>('https://countriesnow.space/api/v0.1/countries/cities', { country: countryName }, { headers })
+      .subscribe({
+        next: (res) => {
+          this.cities = res.data || [];
+        },
+        error: (err) => {
+          console.error('Failed to load cities:', err);
+        }
+      });
+  }
+
+  togglePassword(): void {
     this.showPassword = !this.showPassword;
   }
 
-  signup() {
+  // ✅ Signup form submission
+  signup(): void {
     if (this.signupForm.invalid) {
       this.signupForm.markAllAsTouched();
       return;
@@ -44,10 +91,9 @@ export class SignupComponent {
           this.loading = false;
           Swal.fire({
             icon: 'success',
-            title: 'Account Created Successfully ',
-            text: 'You can now login to your account',
-            timer: 3000,        // 3 seconds auto-close
-            timerProgressBar: true,
+            title: 'Account Created Successfully!',
+            text: 'You can now login to your account.',
+            timer: 2500,
             showConfirmButton: false,
             position: 'top',
           }).then(() => {
@@ -60,9 +106,8 @@ export class SignupComponent {
           Swal.fire({
             icon: 'error',
             title: 'Signup Failed',
-            text: err.error.message || 'Something went wrong!',
-            timer: 3000,        // 3 seconds auto-close
-            timerProgressBar: true,
+            text: err.error?.message || 'Something went wrong!',
+            timer: 3000,
             showConfirmButton: false,
             position: 'top',
           });

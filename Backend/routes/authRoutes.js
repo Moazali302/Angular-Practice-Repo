@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const { signupUser, loginUser, getProfile } = require('../controllers/authControllers');
+const { signupUser, loginUser, getProfile, updateProfile } = require('../controllers/authControllers');
 const jwt = require('jsonwebtoken');
 
 const SECRET_KEY = "your_secret_key";
@@ -17,16 +17,12 @@ const verifyToken = (req, res, next) => {
     return res.status(401).json({ message: "Invalid or expired token!" });
   }
 };
-
-
-
-
 router.post('/signup', signupUser);
 
 
 router.post('/login', loginUser);
 
-
 router.get('/profile', verifyToken, getProfile);
-
+router.put('/profile', updateProfile)
+router.put("/update",updateProfile)
 module.exports = router;

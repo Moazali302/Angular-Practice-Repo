@@ -38,38 +38,79 @@
 
   <div *ngIf="isLoadingEle" class="text-yellow-300 text-xl animate-pulse">
     ⏳ Loading electronics...
+  </div><div
+  class="min-h-screen bg-gradient-to-r from-gray-900 via-blue-900 to-gray-900 flex flex-col items-center justify-center p-6 space-y-6">
+
+  <h1 data-aos="fade-down" class="text-3xl font-bold text-blue-400 mb-6">Product List</h1>
+
+  <div *ngIf="isLoadingDress" data-aos="zoom-in" class="text-yellow-300 text-xl animate-pulse">
+    ⏳ Loading dress products...
   </div>
 
-  <div *ngIf="errorMessageEle" class="text-red-400 text-lg font-semibold">
+  <div *ngIf="errorMessageDress" data-aos="fade-up" class="text-red-400 text-lg font-semibold">
+    {{ errorMessageDress }}
+  </div>
+
+  <!-- Dress Products -->
+  <div *ngIf="Products.length > 0 && !isLoadingDress"
+    class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 w-full max-w-6xl">
+
+    <div *ngFor="let product of Products"
+      class="bg-gray-800/80 rounded-lg shadow-lg p-4 flex flex-col items-center hover:scale-105 transform transition"
+      data-aos="fade-up" data-aos-delay="100" data-aos-duration="800">
+
+      <img [src]="product.image" alt="{{ product.title }}" class="w-32 h-32 object-contain mb-4">
+      <h2 class="text-lg font-semibold text-white mb-2 text-center">{{ product.title }}</h2>
+      <p class="text-yellow-400 font-bold mb-2">{{ product.price | currency:'USD':'symbol':'1.2-2' }}</p>
+      <p class="text-gray-300 text-sm text-center">{{ product.category }}</p>
+    </div>
+  </div>
+
+  <div *ngIf="!isLoadingDress && !errorMessageDress && Products.length === 0"
+    data-aos="fade-up"
+    class="text-white text-xl">
+    No dress products available. Click the button below to load products.
+  </div>
+
+  <button data-aos="flip-left"
+    class="mt-6 px-6 py-3 bg-blue-600 text-white rounded-lg shadow-md hover:bg-blue-700 transition"
+    (click)="loadProducts()">
+    See Dress Products
+  </button>
+
+  <button data-aos="flip-right"
+    class="mt-6 px-6 py-3 bg-green-600 text-white rounded-lg shadow-md hover:bg-green-700 transition"
+    (click)="fetchElectronics()">
+    See Electronics Products
+  </button>
+
+  <h2 data-aos="fade-down" class="text-2xl font-bold text-blue-400 mb-4">Electronics Products</h2>
+
+  <div *ngIf="isLoadingEle" data-aos="zoom-in" class="text-yellow-300 text-xl animate-pulse">
+    ⏳ Loading electronics...
+  </div>
+
+  <div *ngIf="errorMessageEle" data-aos="fade-up" class="text-red-400 text-lg font-semibold">
     {{ errorMessageEle }}
   </div>
-
 
   <div *ngIf="ElecProducts.length > 0 && !isLoadingEle"
     class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 w-full max-w-6xl">
 
     <div *ngFor="let product of ElecProducts"
-      class="bg-gray-800/80 rounded-lg shadow-lg p-4 flex flex-col items-center hover:scale-105 transform transition">
+      class="bg-gray-800/80 rounded-lg shadow-lg p-4 flex flex-col items-center hover:scale-105 transform transition"
+      data-aos="zoom-in" data-aos-delay="150" data-aos-duration="800">
 
       <img [src]="product.image" alt="{{ product.title }}" class="w-32 h-32 object-contain mb-4">
-
-      <h2 class="text-lg font-semibold text-white mb-2 text-center">
-        {{ product.title }}
-      </h2>
-
-      <p class="text-yellow-400 font-bold mb-2">
-        {{ product.price | currency:'USD':'symbol':'1.2-2' }}
-      </p>
-
-      <p class="text-gray-300 text-sm text-center">
-        {{ product.category }}
-      </p>
-
+      <h2 class="text-lg font-semibold text-white mb-2 text-center">{{ product.title }}</h2>
+      <p class="text-yellow-400 font-bold mb-2">{{ product.price | currency:'USD':'symbol':'1.2-2' }}</p>
+      <p class="text-gray-300 text-sm text-center">{{ product.category }}</p>
     </div>
   </div>
 
-
-  <div *ngIf="!isLoadingEle && !errorMessageEle && ElecProducts.length === 0" class="text-white text-xl">
+  <div *ngIf="!isLoadingEle && !errorMessageEle && ElecProducts.length === 0"
+    data-aos="fade-up"
+    class="text-white text-xl">
     No electronics available. Click the button above to load electronics.
   </div>
 </div>

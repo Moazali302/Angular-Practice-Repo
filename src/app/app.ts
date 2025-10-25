@@ -23,7 +23,7 @@ export class App {
         const url = event.urlAfterRedirects;
         console.log('✅ Current URL:', url); // debug line
 
-        const hideRoutes = ['/login', '/signup','/forgot-password,','/reset-password'];
+        const hideRoutes = ['/login', '/signup','/forgot-password','/reset-password'];
         const shouldHide = hideRoutes.some(r => url.startsWith(r));
         this.showLayout.set(!shouldHide);
         console.log('Show layout:', !shouldHide); // debug line

@@ -66,7 +66,7 @@ export class ResetPassword implements OnInit {
           popup: 'animate__animated animate__fadeOutUp'
         }
       });
-      return;
+      return
     }
 
     this.loading = true;

@@ -32,14 +32,13 @@ export class SignupComponent implements OnInit {
 
     this.loadCountries();
   }
-
-  // ✅ Load all countries
+ 
   loadCountries(): void {
     this.http.get<any>('https://countriesnow.space/api/v0.1/countries')
       .subscribe({
         next: (res) => {
           this.countries = res.data.map((c: any) => c.country);
-          // set default Pakistan
+      
           this.signupForm.patchValue({ country: 'Pakistan' });
           this.loadCities('Pakistan');
         },
@@ -49,7 +48,7 @@ export class SignupComponent implements OnInit {
       });
   }
 
-  // ✅ On country select -> load cities
+ 
   onCountryChange(event: Event): void {
     const select = event.target as HTMLSelectElement;
     const countryName = select.value;
@@ -59,7 +58,6 @@ export class SignupComponent implements OnInit {
     }
   }
 
-  // ✅ Load cities based on country
   loadCities(countryName: string): void {
     const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
     this.http.post<any>('https://countriesnow.space/api/v0.1/countries/cities', { country: countryName }, { headers })
@@ -77,7 +75,7 @@ export class SignupComponent implements OnInit {
     this.showPassword = !this.showPassword;
   }
 
-  // ✅ Signup form submission
+
   signup(): void {
     if (this.signupForm.invalid) {
       this.signupForm.markAllAsTouched();

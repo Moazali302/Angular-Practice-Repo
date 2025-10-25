@@ -5,7 +5,7 @@ import { AuthGuard } from './auth-guard';
 export const routes: Routes = [
   { path: '', redirectTo: 'signup', pathMatch: 'full' },
 
-  { path: 'home', component: Home, canActivate: [AuthGuard] }, 
+  { path: 'home', component: Home, canActivate: [AuthGuard] },
 
   {
     path: 'products',
@@ -29,7 +29,7 @@ export const routes: Routes = [
     path: 'profile',
     loadComponent: () =>
       import('./profile/profile').then(m => m.Profile),
-    canActivate: [AuthGuard] 
+    canActivate: [AuthGuard]
   },
 
   {
@@ -42,6 +42,17 @@ export const routes: Routes = [
     loadComponent: () =>
       import('./login/login').then(m => m.Login),
   },
+
+  {
+    path: 'forgot-password',
+    loadComponent: () =>
+      import('./forgot-password/forgot-password').then(m => m.ForgotPassword),
+  },
+  {
+  path: 'reset-password/:token',
+  loadComponent: () =>
+    import('./reset-password/reset-password').then(m => m.ResetPassword)
+},
 
   { path: '**', redirectTo: 'signup' }
 ];

@@ -1,33 +1,31 @@
-const express = require('express')
-const mongoose = require('mongoose')
-const cors = require('cors')
-require('dotenv').config()
+const express = require('express');
+const mongoose = require('mongoose');
+const cors = require('cors');
+const dotenv = require('dotenv');
 
-const app = express()
+dotenv.config();
+const app = express();
 
-app.use(cors())
-app.use(express.json())
-app.use(express.urlencoded({ extended: true }))
+// ================= Middleware =================
+app.use(cors());
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 
-// Routes
-const authRoutes = require('./routes/authRoutes')
-app.use('/api/auth', authRoutes)
+// ================= Routes =================
+const authRoutes = require('./routes/authRoutes');
+app.use('/api/auth', authRoutes);
 
-// MongoDB Connection
-mongoose.connect('mongodb://127.0.0.1:27017/angulardb')
-.then(() => {
-  console.log('MongoDB connected...')
-})
-.catch(err => {
-  console.log('MongoDB connection error:', err)
-})
+// ================= Database =================
+const MONGO_URI = process.env.MONGO_URI || 'mongodb://127.0.0.1:27017/angulardb';
+mongoose.connect(MONGO_URI)
+  .then(() => console.log('MongoDB connected successfully...'))
+  .catch((err) => console.error(' MongoDB connection error:', err));
 
-// Default Route
+// ================= Root Route =================
 app.get('/', (req, res) => {
-  res.send('Server is running...')
-})
+  res.send(' Server is running successfully...');
+});
 
-// Start Server
-app.listen(3000, () => {
-  console.log('Server running at http://localhost:3000')
-})
+// ================= Server =================
+const PORT = process.env.PORT || 3000;
+app.listen(PORT, () => console.log(`Server running at: http://localhost:${PORT}`));

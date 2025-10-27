@@ -30,8 +30,6 @@ export class Profile implements OnInit {
       this.router.navigate(['/login']);
       return;
     }
-
-    // ✅ Get Profile from backend
     this.http
       .get<{ user: any }>('http://localhost:3000/api/auth/profile', {
         headers: { Authorization: `Bearer ${token}` },
@@ -49,13 +47,11 @@ export class Profile implements OnInit {
       });
   }
 
-  // ✅ Enable Edit Mode
   enableEdit() {
     this.isEditing = true;
     this.updatedUser = { ...this.user };
   }
 
-  // ✅ Save Changes and show SweetAlert2 popup
   saveChanges() {
     const token = localStorage.getItem('token');
     if (!token) return;
@@ -109,10 +105,11 @@ export class Profile implements OnInit {
         },
       });
   }
-
-  // ✅ Logout
+  
   logout() {
     this.authService.logout();
     this.router.navigate(['/login']);
   }
+
+
 }

@@ -3,11 +3,12 @@ import { FormsModule } from '@angular/forms'
 import { HttpClient } from '@angular/common/http'
 import { NgIf } from '@angular/common'
 import Swal from 'sweetalert2'
+import { RouterModule } from '@angular/router'
 
 @Component({
   selector: 'app-forgot-password',
   standalone: true,
-  imports: [FormsModule, NgIf],
+  imports: [FormsModule, NgIf,RouterModule],
   templateUrl: './forgot-password.html',
   styleUrls: ['./forgot-password.css']
 })
@@ -20,7 +21,6 @@ export class ForgotPassword {
 
   onSubmit() {
 
-    // check if email empty
     if(!this.email){
       Swal.fire({
         icon: 'warning',
@@ -34,11 +34,7 @@ export class ForgotPassword {
       })
       return
     }
-
-    // start loading
     this.loading = true
-
-    // call api for forgot password
     this.http.post('http://localhost:3000/api/auth/forgot-password', { email: this.email })
     .subscribe({
       next: () => {

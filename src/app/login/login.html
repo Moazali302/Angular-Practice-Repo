@@ -16,12 +16,10 @@
       Please login to continue
     </h3>
 
+    <!-- Email + Password Login -->
     <form (ngSubmit)="login()" class="space-y-5">
-      <!-- Email -->
       <div>
-        <label class="block text-gray-300 mb-1 text-sm sm:text-base">
-          Email Address
-        </label>
+        <label class="block text-gray-300 mb-1 text-sm sm:text-base">Email Address</label>
         <input
           type="email"
           [(ngModel)]="email"
@@ -33,11 +31,8 @@
         />
       </div>
 
-   
       <div class="relative">
-        <label class="block text-gray-300 mb-1 text-sm sm:text-base">
-          Password
-        </label>
+        <label class="block text-gray-300 mb-1 text-sm sm:text-base">Password</label>
         <input
           [type]="showPassword ? 'text' : 'password'"
           [(ngModel)]="password"
@@ -47,63 +42,33 @@
           focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 pr-10 transition duration-200 text-sm sm:text-base"
           required
         />
-
-  
         <button
           type="button"
           class="absolute inset-y-0 right-2 flex items-center px-2 text-blue-400 hover:text-blue-300 transition"
           (click)="togglePassword()"
         >
-          <svg
-            *ngIf="!showPassword"
-            xmlns="http://www.w3.org/2000/svg"
-            fill="none"
-            viewBox="0 0 24 24"
-            stroke-width="2"
-            stroke="currentColor"
-            class="w-6 h-6 mt-6"
-          >
-            <path
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"
-            />
-            <path
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              d="M2.458 12C3.732 7.943 7.523 5 12 5c4.477 0 8.268 2.943 9.542 7-1.274 4.057-5.065 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"
-            />
+          <svg *ngIf="!showPassword" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+               stroke-width="2" stroke="currentColor" class="w-6 h-6 mt-6">
+            <path stroke-linecap="round" stroke-linejoin="round"
+                  d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/>
+            <path stroke-linecap="round" stroke-linejoin="round"
+                  d="M2.458 12C3.732 7.943 7.523 5 12 5c4.477 0 8.268 2.943 
+                  9.542 7-1.274 4.057-5.065 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/>
           </svg>
-
-          <svg
-            *ngIf="showPassword"
-            xmlns="http://www.w3.org/2000/svg"
-            fill="none"
-            viewBox="0 0 24 24"
-            stroke-width="2"
-            stroke="currentColor"
-            class="w-6 h-6 mt-6"
-          >
-            <path
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              d="M3 3l18 18M4.5 4.5l15 15"
-            />
+          <svg *ngIf="showPassword" xmlns="http://www.w3.org/2000/svg" fill="none"
+               viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-6 h-6 mt-6">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M3 3l18 18M4.5 4.5l15 15"/>
           </svg>
         </button>
       </div>
 
-  
       <div class="flex justify-end">
-        <a
-          routerLink="/forgot-password"
-          class="text-cyan-400 hover:text-cyan-300 text-sm sm:text-base transition duration-200 hover:underline"
-        >
+        <a routerLink="/forgot-password"
+           class="text-cyan-400 hover:text-cyan-300 text-sm sm:text-base transition duration-200 hover:underline">
           Forgot Password?
         </a>
       </div>
 
-      <!-- Submit -->
       <button
         type="submit"
         [disabled]="loading"
@@ -115,6 +80,34 @@
         <span *ngIf="loading" class="animate-pulse">Logging in...</span>
       </button>
     </form>
+
+    <div class="flex items-center my-6">
+      <hr class="flex-grow border-gray-500" />
+      <span class="px-3 text-gray-300 text-sm">OR</span>
+      <hr class="flex-grow border-gray-500" />
+    </div>
+
+    <!-- ✅ Google Login Custom Button -->
+    <button
+      type="button"
+      (click)="signInWithGoogle()"
+      class="flex items-center justify-center w-full gap-3 py-2.5 bg-white text-gray-800 rounded-lg font-medium shadow-md 
+             hover:bg-gray-100 transition duration-200 mb-3"
+    >
+      <img src="assets/google.svg" alt="Google" class="w-5 h-5" />
+      <span>Continue with Google</span>
+    </button>
+
+    <!-- ✅ Microsoft Login Button -->
+    <button
+      type="button"
+      (click)="signInWithMicrosoft()"
+      class="flex items-center justify-center w-full gap-3 py-2.5 bg-[#2F2F2F] text-white rounded-lg font-medium shadow-md 
+             hover:bg-[#3a3a3a] transition duration-200"
+    >
+      <img src="assets/microsoft.svg" alt="Microsoft" class="w-5 h-5" />
+      <span>Continue with Microsoft</span>
+    </button>
 
     <p class="text-gray-400 text-center mt-5 text-sm sm:text-base">
       Don't have an account?

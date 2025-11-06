@@ -1,3 +1,5 @@
+// Angular-Practice-Repo/src/app/auth-service.ts
+
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
@@ -20,14 +22,15 @@ export class AuthService {
     return this.http.post(`${this.apiUrl}/login`, { email, password });
   }
 
+  // 🔹 Social login (Google / Microsoft)
+  socialLogin(providerToken: string, provider: 'google' | 'microsoft'): Observable<any> {
+    // backend expects { token } in body
+    return this.http.post(`${this.apiUrl}/${provider}`, { token: providerToken });
+  }
+
   // 🔹 Save token in local storage
   setToken(token: string): void {
     localStorage.setItem('token', token);
-  }
-
-  // 🔹 Social login (Google / Microsoft)
-  socialLogin(providerToken: string, provider: 'google' | 'microsoft'): Observable<any> {
-    return this.http.post(`${this.apiUrl}/${provider}`, { token: providerToken });
   }
 
   // 🔹 Get stored token

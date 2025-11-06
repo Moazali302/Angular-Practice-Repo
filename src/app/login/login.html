@@ -3,7 +3,7 @@
   style="background-image: url('assets/login.jpg');"
 >
   <div
-    class="w-full max-w-sm sm:max-w-md md:max-w-md mb-37 lg:max-w-md mt-28 xl:max-w-lg 
+    class="w-full max-w-sm sm:max-w-md md:max-w-md mb-10 lg:max-w-md mt-20 xl:max-w-lg 
     bg-gray-900/70 backdrop-blur-xl rounded-2xl shadow-[0_0_30px_rgba(0,120,255,0.3)]
     border border-blue-500/30 p-6 sm:p-8 md:p-10 transition-transform duration-300 hover:scale-[1.01]"
   >
@@ -12,6 +12,7 @@
     >
       Welcome Back
     </h2>
+
     <h3 class="text-center text-gray-300 mb-6 text-sm sm:text-base">
       Please login to continue
     </h3>
@@ -46,6 +47,7 @@
           type="button"
           class="absolute inset-y-0 right-2 flex items-center px-2 text-blue-400 hover:text-blue-300 transition"
           (click)="togglePassword()"
+          aria-label="Toggle password visibility"
         >
           <svg *ngIf="!showPassword" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
                stroke-width="2" stroke="currentColor" class="w-6 h-6 mt-6">
@@ -87,27 +89,35 @@
       <hr class="flex-grow border-gray-500" />
     </div>
 
-    <!-- ✅ Google Login Custom Button -->
-    <button
-      type="button"
-      (click)="signInWithGoogle()"
-      class="flex items-center justify-center w-full gap-3 py-2.5 bg-white text-gray-800 rounded-lg font-medium shadow-md 
-             hover:bg-gray-100 transition duration-200 mb-3"
-    >
-      <img src="assets/google.svg" alt="Google" class="w-5 h-5" />
-      <span>Continue with Google</span>
-    </button>
+    <!-- ✅ Google Custom Button (same look as Microsoft) -->
+   <div class="flex justify-center mb-3 w-full">
+  <div id="googleBtn">
+  <button
+    type="button"
+    (click)="signInWithGoogle()"
+    class="flex items-center justify-center w-full gap-3 py-2.5 
+           bg-white text-gray-800 rounded-lg font-medium shadow-md 
+           hover:bg-gray-100 transition duration-200"
+  >
+    <img src="assets/google.svg" alt="Google Logo" class="w-5 h-5" />
+    <span class="text-sm sm:text-base font-semibold">Continue with Google</span>
+  </button>
+  </div>
+</div> 
 
     <!-- ✅ Microsoft Login Button -->
-    <button
-      type="button"
-      (click)="signInWithMicrosoft()"
-      class="flex items-center justify-center w-full gap-3 py-2.5 bg-[#2F2F2F] text-white rounded-lg font-medium shadow-md 
-             hover:bg-[#3a3a3a] transition duration-200"
-    >
-      <img src="assets/microsoft.svg" alt="Microsoft" class="w-5 h-5" />
-      <span>Continue with Microsoft</span>
-    </button>
+    <div class="flex justify-center w-full">
+      <button
+        type="button"
+        (click)="signInWithMicrosoft()"
+        class="flex items-center justify-center w-full gap-3 py-2.5 
+               bg-[#2F2F2F] text-white rounded-lg font-medium shadow-md 
+               hover:bg-[#3a3a3a] transition duration-200"
+      >
+        <img src="assets/microsoft.svg" alt="Microsoft Logo" class="w-5 h-5" />
+        <span class="text-sm sm:text-base font-semibold">Continue with Microsoft</span>
+      </button>
+    </div>
 
     <p class="text-gray-400 text-center mt-5 text-sm sm:text-base">
       Don't have an account?

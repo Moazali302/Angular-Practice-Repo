@@ -16,7 +16,6 @@ app.use(cors({
   credentials: true
 }))
 
-// ✅ Add proper security headers for Google login popup
 app.use((req, res, next) => {
   res.setHeader('Cross-Origin-Opener-Policy', 'same-origin-allow-popups')
   res.setHeader('Cross-Origin-Embedder-Policy', 'require-corp')

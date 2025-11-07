@@ -32,7 +32,14 @@ const signupUser = async (req, res) => {
     })
 
     await newUser.save()
-    res.json({ message: 'Signup successful!' })
+
+    const token = jwt.sign(
+      { id: newUser._id, email: newUser.email },
+      SECRET_KEY,
+      { expiresIn: '1d' }
+    )
+
+    res.json({ message: 'Signup successful!', token, user: newUser })
   } catch (err) {
     res.status(500).json({ message: 'Signup failed!', error: err })
   }
@@ -56,9 +63,9 @@ const loginUser = async (req, res) => {
       return res.status(401).json({ message: 'Invalid credentials!' })
 
     const token = jwt.sign(
-      { _id: user._id, email: user.email },
+      { id: user._id, email: user.email },
       SECRET_KEY,
-      { expiresIn: '1h' }
+      { expiresIn: '1d' }
     )
 
     res.json({ message: 'Login successful!', token, user })
@@ -94,9 +101,9 @@ const googleLogin = async (req, res) => {
     }
 
     const jwtToken = jwt.sign(
-      { _id: user._id, email: user.email },
+      { id: user.id, email: user.email },
       SECRET_KEY,
-      { expiresIn: '7d' }
+      { expiresIn: '1d' }
     )
 
     res.json({ message: 'Google login successful!', token: jwtToken, user })
@@ -124,7 +131,7 @@ const microsoftLogin = async (req, res) => {
     }
 
     const jwtToken = jwt.sign(
-      { _id: user._id, email: user.email },
+      { id: user._id, email: user.email },
       SECRET_KEY,
       { expiresIn: '7d' }
     )
@@ -138,8 +145,10 @@ const microsoftLogin = async (req, res) => {
 // ======================== PROFILE =========================
 const getProfile = async (req, res) => {
   try {
-    const user = await User.findById(req.user._id).select('-password')
+    // ✅ Fix: token payload me id send ho rahi hai
+    const user = await User.findById(req.user.id).select('-password')
     if (!user) return res.status(404).json({ message: 'User not found!' })
+    
     res.json({ user })
   } catch (err) {
     res.status(500).json({ message: 'Error fetching profile', error: err })
@@ -151,7 +160,7 @@ const updateProfile = async (req, res) => {
   try {
     const { name, email, country, city } = req.body
     const updatedUser = await User.findByIdAndUpdate(
-      req.user._id,
+      req.user.id,
       { name, email, country, city },
       { new: true }
     ).select('-password')

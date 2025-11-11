@@ -36,7 +36,7 @@ export class LoginComponent implements OnInit {
         google.accounts.id.initialize({
           client_id: '1067226069123-t254cc7i510ra0pp1siqejbhbc1ugi01.apps.googleusercontent.com',
           callback: (res: any) => this.handleGoogleResponse(res),
-          use_fedcm_for_prompt: true  // 👈 Important for new FedCM flow
+          use_fedcm_for_prompt: true
         })
 
         // ✅ Render Sign-In button
